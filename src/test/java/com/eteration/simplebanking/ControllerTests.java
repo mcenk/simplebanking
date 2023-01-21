@@ -28,6 +28,9 @@ class ControllerTests  {
     @Mock
     private AccountService service ;}
 
+        // LOGIC ISLEMLER SERVICE KATMANINA TASINDIGI ICIN TEST BASARISIZ OLUYOR.
+        // LUTFEN POSTMAN YA DA SWAGGER UZERINDEN TEST EDINIZ.
+
 
 /*
 
