@@ -1,6 +1,7 @@
-package com.eteration.simplebanking.dto;
+package com.eteration.simplebanking.converter;
 
 import com.eteration.simplebanking.model.Account;
+import com.eteration.simplebanking.response.AccountDto;
 import org.springframework.stereotype.Component;
 
 @Component

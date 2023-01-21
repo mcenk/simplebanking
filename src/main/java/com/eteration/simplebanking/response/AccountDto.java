@@ -1,5 +1,6 @@
-package com.eteration.simplebanking.dto;
+package com.eteration.simplebanking.response;
 
+import com.eteration.simplebanking.model.Account;
 import com.eteration.simplebanking.model.Transaction;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Set;
+
 
 @Builder
 @Data
@@ -24,6 +26,5 @@ public class AccountDto {
     private LocalDateTime createDate;
 
     private Set<Transaction> transactions;
-
 
 }

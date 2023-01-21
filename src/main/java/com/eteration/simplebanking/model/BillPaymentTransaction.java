@@ -3,13 +3,10 @@ package com.eteration.simplebanking.model;
 import javax.persistence.*;
 
 
-
 @Entity
 public class BillPaymentTransaction extends Transaction {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+
     private String payee;
     private String phoneNumber;
     private double amount;

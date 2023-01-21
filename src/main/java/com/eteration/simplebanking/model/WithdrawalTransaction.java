@@ -1,24 +1,15 @@
 package com.eteration.simplebanking.model;
 
 
-import com.eteration.simplebanking.services.ApprovalCodeService;
-
 import javax.persistence.Entity;
 import java.time.LocalDateTime;
+
 @Entity
 public class WithdrawalTransaction extends Transaction {
 
-
-    private LocalDateTime date;
-    private double amount;
-    private String type;
-    private String approvalCode;
-
     public WithdrawalTransaction(double amount) {
-        this.setDate(LocalDateTime.now());
-        this.setAmount(amount);
-        this.setApprovalCode(ApprovalCodeService.generateCode());
-        this.setType(getClass().getSimpleName());
+        this.amount = amount;
+
     }
 
     public WithdrawalTransaction() {

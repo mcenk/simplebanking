@@ -1,4 +1,5 @@
 package com.eteration.simplebanking.exception;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class ExceptionAdvisor extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach(error ->{
+        ex.getBindingResult().getAllErrors().forEach(error -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
@@ -28,7 +29,17 @@ public class ExceptionAdvisor extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(TransactionFailedException.class)
-    public ResponseEntity<?> customerNotFoundExceptionHandler(TransactionFailedException exception)  {
+    public ResponseEntity<?> transactionFailedException(TransactionFailedException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AccountNotFoundException.class)
+    public ResponseEntity<?> accountNotFoundException(AccountNotFoundException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InsufficientBalanceException.class)
+    public ResponseEntity<?> insufficientBalanceException(InsufficientBalanceException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
@@ -36,4 +47,6 @@ public class ExceptionAdvisor extends ResponseEntityExceptionHandler {
     public ResponseEntity<?> generalExceptionHandler(Exception exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+
 }

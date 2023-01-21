@@ -2,25 +2,20 @@ package com.eteration.simplebanking.model;
 
 import com.eteration.simplebanking.services.ApprovalCodeService;
 import lombok.Data;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class DepositTransaction extends Transaction  {
+public class DepositTransaction extends Transaction {
 
-     LocalDateTime date;
-     double amount;
-     String type;
-     String approvalCode;
 
     public DepositTransaction(double amount) {
-        this.setDate(LocalDateTime.now());
-        this.setAmount(amount);
-        this.setApprovalCode(ApprovalCodeService.generateCode());
-        this.setType(getClass().getSimpleName());
+        this.amount = amount;
     }
 
-    public DepositTransaction(){};
+    public DepositTransaction() {
+    }
 
     @Override
     public LocalDateTime getDate() {

@@ -1,14 +1,17 @@
-package com.eteration.simplebanking.dto;
+package com.eteration.simplebanking.request;
 
-import lombok.Data;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 
 public class CreateAccountRequest {
     @NotBlank
+    @Size(min = 5, max = 12)
     private String accountNumber;
     @NotBlank
     private String owner;
+    @Min(value = 0)
     private double balance;
 
     public CreateAccountRequest(String accountNumber, String owner) {

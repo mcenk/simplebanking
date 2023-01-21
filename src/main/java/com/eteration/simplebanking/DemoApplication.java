@@ -21,6 +21,8 @@ public class DemoApplication   {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
+
+	// Swagger ile api testi icin eklenmistir
 	@Bean
 	public OpenAPI customAPI(@Value("${application-description}") String description,
 							 @Value("${application-version}") String version){

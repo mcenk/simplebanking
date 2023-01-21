@@ -1,3 +1,33 @@
+## Hello, I am Mustafa CENK.
+## In this application, a simulation of how simple banking transactions are carried out is demonstrated.
+
+#### Improvements have been made in accordance with the following requirements.
+#### Changes have been made in some areas deemed important. One of these changes is that the logic operations have been moved from the controller layer to the service layer.
+#### However, due to the changes made in the controller and service layers, the controller test is not suitable for use. It would be more appropriate to test the controller and service layers separately.
+#### A swagger configuration has been defined for API testing. In addition, the test phase is demonstrated with the images provided below.
+
+#### The Transaction classes should have been designed as Command design pattern or Strategy design pattern, as per the requirement of Bonus Task 1. However, it was decided to abandon this due to the need to keep a reference to transactions within the Account class.
+
+
+
+# TEST IMAGES
+## Create Account
+![create](images/CreateAccount.png)
+
+## Deposit Account
+
+![deposit](images/Deposit.png)
+
+## Get Account by Account Number
+
+![get](images/getAccount.png)
+
+## API List
+![endpoint](images/api-endpoint.png)
+
+
+# ASSIGNMENT
+
 # Getting Started with Simple Banking (Estimated duration 1-3 hours)
 
 In this assignment you will build a banking service that can handle any number of transactions for bank accounts. The service is part of a larger collection of services that model the inner workings of a bank. The services for the "bank account" provide a simple model of how bank accounts might work in an overly simplified world.

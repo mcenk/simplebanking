@@ -1,16 +1,14 @@
 package com.eteration.simplebanking.model;
 
 
-// This class is a place holder you can change the complete implementation
-
 import com.eteration.simplebanking.exception.InsufficientBalanceException;
-import com.eteration.simplebanking.services.TransactionService;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import com.eteration.simplebanking.response.AccountDto;
 import org.springframework.data.annotation.CreatedDate;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -27,45 +25,49 @@ public class Account {
     private double balance;
     @CreatedDate
     private LocalDateTime createDate;
-    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Transaction> transactions;
 
-    public Account( String owner,String accountNumber) {
+    public Account(String owner, String accountNumber) {
         this.owner = owner;
         this.accountNumber = accountNumber;
-        this.balance= 0.0;
-        this.transactions= new HashSet<>();
+        this.balance = 0.0;
+        this.transactions = new HashSet<>();
 
     }
+
     public Account() {
     }
 
-    public void post(Transaction transaction){
+    public void post(Transaction transaction) {
         if (this.transactions == null)
-                this.transactions = new HashSet<>();
+            this.transactions = new HashSet<>();
 
-        if(transaction.getType().equals("DepositTransaction") )
-        this.balance += transaction.getAmount();
-        else this.balance-=transaction.getAmount();
+        if (transaction.getType().equals("DepositTransaction"))
+            deposit(transaction.getAmount());
 
-        this.transactions.add(transaction);}
+        if (transaction.getType().equals("WithdrawalTransaction"))
+            withdraw(transaction.getAmount());
 
-    public void deposit(double amount){
-        if(amount>0){
+
+        this.transactions.add(transaction);
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
             this.balance += amount;
-        } else throw new RuntimeException(); // COSTUM EXCEPTION EKLE BU ALANA
+        }
     }
 
     public void withdraw(double amount) throws InsufficientBalanceException {
-            if (amount > balance) {
-                throw new InsufficientBalanceException("Insufficient balance in account.");
-            }
-            balance -= amount;
+        if (amount > balance) { // FAILED FIRST
+            throw new InsufficientBalanceException("Insufficient balance in account.");
         }
+        balance -= amount;
+    }
 
-        // GETTER SETTER ALANI
-        // TEST AMACLI LOMBOK ANOTASYONLARI KALDIRILDI
 
+    // GETTER SETTER
     public Long getId() {
         return id;
     }
@@ -113,6 +115,7 @@ public class Account {
     public void setTransactions(Set<Transaction> transactions) {
         this.transactions = transactions;
     }
+
 }
 
 
