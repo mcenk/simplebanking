@@ -43,8 +43,9 @@ public class AccountService {
     public AccountDto createAccount(CreateAccountRequest createAccountRequest) {
 
         Optional<Account> customer = accountRepository.findByAccountNumber(createAccountRequest.getAccountNumber());
-        if (customer.isPresent())
+        if (customer.isPresent()) {
             throw new DuplicateAccountException("Allready have a account with" + createAccountRequest.getAccountNumber());
+        }
 
         Account account = new Account();
         account.setOwner(createAccountRequest.getOwner());
@@ -85,6 +86,7 @@ public class AccountService {
                 .map(accountDtoConverter::converter)
                 .orElseThrow(() -> new AccountNotFoundException("Account could not find by id:" + accountNumber));
     }
+
 
     @Synchronized
     @Transactional(propagation = Propagation.REQUIRED)

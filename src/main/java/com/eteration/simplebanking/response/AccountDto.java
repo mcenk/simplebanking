@@ -27,4 +27,8 @@ public class AccountDto {
 
     private Set<Transaction> transactions;
 
+    public AccountDto(String accountNumber, String owner) {
+        this.accountNumber = accountNumber;
+        this.owner = owner;
+    }
 }
